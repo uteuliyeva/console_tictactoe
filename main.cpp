@@ -19,7 +19,6 @@ const char NO_ONE='N';
 //function prototypes
 void showRules();
 void showBoard(const vector<char>& board);
-char askTurn(string question);
 int askStep(string question, int high,int low=0);
 char getHumanPiece();
 char getOpponentPiece(char piece);
@@ -52,4 +51,25 @@ int main(){
   }
   announceWinner(getWinne(board),computerPiece,humanPiece);
   return 0;
+}
+
+void showRules(){
+  cout<<"---TIC-TAC-TOE---\n\n";
+  cout<<"Here you can make moves by choosing a number 1-9.\n";
+  cout<<"Each number corresponds to the position on the board"\n";
+  cout<<"1|2|3"<<endl;
+  cout<<"-----"<<endl;
+  cout<<"4|5|6"<<endl;
+  cout<<"-----"<<endl;
+  cout<<"7|8|9"<<endl;
+}
+
+char getHumanPiece(){
+  char response;
+  string question="Please choose your piece. Press X or O. X goes first.";
+  do{
+    cout<<"\n"<<question<<"\n";
+    cin>>response;
+  }while(response!='x'&&response!='X'&&response!='y'&&response!='Y');
+  return toupper(response);
 }
