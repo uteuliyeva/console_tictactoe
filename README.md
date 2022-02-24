@@ -1,2 +1,2 @@
 # console_tictactoe
-Simple console tictactoe game in C++
+Console tictactoe game in C++ where human plays against computer.
