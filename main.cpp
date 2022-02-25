@@ -25,7 +25,7 @@ char getOpponentPiece(char piece);
 char getWinner(const vector<char>& board);
 bool isLegalMove(const vector<char>& board, int move);
 int getHumanMove(const vector<char>& board, char humanPiece);
-int getComputerMove(const verctor<char>& board, char computerPiece);
+int getComputerMove(const verctor<char> board, char computerPiece);
 void announceWinner(char winner, char computerPiece, char humanPiece);
 
 int main(){
@@ -116,6 +116,10 @@ char getWinner(const vector<char>& board){
   return NO_ONE;
 }
 
+inline bool isLegalMove(const vector<char>& board, int move){
+  return (board[move]==EMPTY);
+}
+
 int getHumanMove(const vector<char>& board, char humanPiece){
   string question="Enter your next move (1-9).";
   int move=askMove(question,board.size());
@@ -127,6 +131,52 @@ int getHumanMove(const vector<char>& board, char humanPiece){
   return move-1;
 }
 
-bool isLegalMove(const vector<char>& board, int move){
-  return (board[move]==EMPTY)
+int getComputerMove(const verctor<char> board, char computerPiece){
+  unsigned int move=0;
+  bool foundMove=false;
+
+  //if computer can win on this move, make the move
+  while(!foundMove && move<board.size()){
+    if (isLegalMove(board,move)){
+      board[move]=computerPiece;
+      foundMove=getWinner(board)==computerPiece;
+      board[move]=EMPTY;
+    }
+    if (!foundMove){
+      move++;
+    }
+  }
+
+  //else if human can win on next move, then block the move
+  if (!foundMove){
+    move=0;
+    humanPiece=getOpponentPiece(computerPiece);
+    while(!foundMove&&move<board.size()){
+      if(isLegalMove(board,move)){
+        board[move]=humanPiece;
+        foundMove=getWinner(board)==humanPiece;
+        board[move]=EMPTY;
+      }
+      if(!foundMove){
+        move++;
+      }
+    }
+  }
+  //else move is the best possible option out of free squares
+  //first check the availability of the central square, then corners and then the rest of squares
+  if(!foundMove){
+    move=0;
+    unsigned int i=0;
+    const int MOVES_BY_PRIORITY={4,0,2,6,8,1,3,5,7};
+
+    while(!found && i<board.size()){
+      move=MOVES_BY_PRIORITY[i];
+      if(isLegalMove(board,move)){
+        found=true;
+      }
+      i++;
+    }
+  }
+  cout<<"Computer takes the square number "<<move+1<<endl;
+  return move+1;
 }
