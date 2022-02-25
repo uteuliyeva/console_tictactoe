@@ -126,3 +126,7 @@ int getHumanMove(const vector<char>& board, char humanPiece){
   cout<<"Ok!";
   return move-1;
 }
+
+bool isLegalMove(const vector<char>& board, int move){
+  return (board[move]==EMPTY)
+}
