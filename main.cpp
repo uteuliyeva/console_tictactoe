@@ -180,3 +180,15 @@ int getComputerMove(const verctor<char> board, char computerPiece){
   cout<<"Computer takes the square number "<<move+1<<endl;
   return move+1;
 }
+
+void announceWinner(char winner, char computerPiece, char humanPiece){
+  if (winner==computerPiece){
+    cout<<"Unfortunately, you lost."<<endl;
+  }
+  else if (winner=humanPiece){
+    cout<<"Congratulations! You won!"<<endl;
+  }
+  else{
+    cout<<"It is a tie!"<<endl;
+  }
+}
