@@ -72,7 +72,7 @@ char getHumanPiece(){
   do{
     cout<<"\n"<<question<<"\n";
     cin>>response;
-  }while(response!='x'&&response!='X'&&response!='y'&&response!='Y');
+  }while(response!='x'&&response!='X'&&response!='o'&&response!='O');
   return toupper(response);
 }
 
