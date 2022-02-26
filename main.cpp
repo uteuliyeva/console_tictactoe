@@ -103,10 +103,10 @@ char getWinner(const vector<char>& board){
   const int N_ROWS=8;
   //check whether one of the rows is filled with same pieces
   for (int row=0;row<N_ROWS;++row){
-    if(WINNING_ROWS[row][0]!=EMPTY&&
-      WINNING_ROWS[row][0]==WINNING_ROWS[row][1]&&
-      WINNING_ROWS[row][1]==WINNING_ROWS[row][2]){
-        return WINNING_ROWS[row][0];
+    if(board[WINNING_ROWS[row][0]]!=EMPTY&&
+      board[WINNING_ROWS[row][0]]==board[WINNING_ROWS[row][1]]&&
+      board[WINNING_ROWS[row][1]]==board[WINNING_ROWS[row][2]]){
+        return board[WINNING_ROWS[row][0]];
       }
   }
   //check for tie
@@ -195,7 +195,7 @@ void announceWinner(char winner, char computerPiece, char humanPiece){
   if (winner==computerPiece){
     cout<<"Unfortunately, you lost."<<endl;
   }
-  else if (winner=humanPiece){
+  else if (winner==humanPiece){
     cout<<"Congratulations! You won!"<<endl;
   }
   else{
