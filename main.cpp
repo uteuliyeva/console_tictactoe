@@ -87,11 +87,11 @@ char getOpponentPiece(char piece){
 }
 
 void showBoard(const vector<char>& board){
-  cout<<"\n\t "<<board[0]<<" | "<<board[1]<<" | "<<board[2]<<endl;
-  cout<<"\n\t ----------"<<endl;
-  cout<<"\n\t "<<board[3]<<" | "<<board[4]<<" | "<<board[5]<<endl;
-  cout<<"\n\t ----------"<<endl;
-  cout<<"\n\t "<<board[6]<<" | "<<board[7]<<" | "<<board[8]<<endl;
+  cout<<"\n\t "<<board[0]<<" | "<<board[1]<<" | "<<board[2];
+  cout<<"\n\t ----------";
+  cout<<"\n\t "<<board[3]<<" | "<<board[4]<<" | "<<board[5];
+  cout<<"\n\t ----------";
+  cout<<"\n\t "<<board[6]<<" | "<<board[7]<<" | "<<board[8];
   cout<<"\n\n";
 }
 
@@ -126,7 +126,7 @@ int askMove(string question, int high,int low){
   do{
     cout<<question<<" ("<<low<<"-"<<high<<"):";
     cin>>move;
-  }while(move>=high||move<=low);
+  }while(move>high||move<low);
   return move-1;
 }
 
