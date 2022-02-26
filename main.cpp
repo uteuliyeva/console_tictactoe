@@ -25,7 +25,7 @@ char getOpponentPiece(char piece);
 char getWinner(const vector<char>& board);
 bool isLegalMove(const vector<char>& board, int move);
 int getHumanMove(const vector<char>& board, char humanPiece);
-int getComputerMove(const verctor<char> board, char computerPiece);
+int getComputerMove(vector<char> board, char computerPiece);
 void announceWinner(char winner, char computerPiece, char humanPiece);
 
 int main(){
@@ -58,7 +58,7 @@ int main(){
 void showRules(){
   cout<<"---TIC-TAC-TOE---\n\n";
   cout<<"Here you can make moves by choosing a number 1-9.\n";
-  cout<<"Each number corresponds to the position on the board"\n";
+  cout<<"Each number corresponds to the position on the board\n";
   cout<<"\t 1 | 2 | 3 "<<endl;
   cout<<"\t ----------"<<endl;
   cout<<"\t 4 | 5 | 6 "<<endl;
@@ -86,11 +86,11 @@ char getOpponentPiece(char piece){
 }
 
 void showBoard(const vector<char>& board){
-  cout<<"\t "<<board[0]<<" | "<<board[1]" | "<<board[2]<<" "<<endl;
-  cout<<"\t ----------"<<endl;
-  cout<<"\t "<<board[3]<<" | "<<board[4]" | "<<board[5]<<" "<<endl;
-  cout<<"\t ----------"<<endl;
-  cout<<"\t "<<board[6]<<" | "<<board[7]" | "<<board[8]<<" "<<endl;
+  cout<<"\n\t "<<board[0]<<" | "<<board[1]<<" | "<<board[2]<<endl;
+  cout<<"\n\t ----------"<<endl;
+  cout<<"\n\t "<<board[3]<<" | "<<board[4]<<" | "<<board[5]<<endl;
+  cout<<"\n\t ----------"<<endl;
+  cout<<"\n\t "<<board[6]<<" | "<<board[7]<<" | "<<board[8]<<endl;
   cout<<"\n\n";
 }
 
@@ -98,7 +98,7 @@ char getWinner(const vector<char>& board){
   //all possible winning rows
   const int WINNING_ROWS[8][3]={{0,1,2},{3,4,5},{6,7,8},
   {0,3,6},{1,4,7},{2,5,8},
-  {0,4,8},{2,4,6}}
+  {0,4,8},{2,4,6}};
   const int N_ROWS=8;
   //check whether one of the rows is filled with same pieces
   for (int row=0;row<N_ROWS;++row){
@@ -128,10 +128,10 @@ int getHumanMove(const vector<char>& board, char humanPiece){
     move=askMove("Please choose again (1-9).",board.size());
   }
   cout<<"Ok!";
-  return move-1;
+  return move;
 }
 
-int getComputerMove(const verctor<char> board, char computerPiece){
+int getComputerMove(vector<char> board, char computerPiece){
   unsigned int move=0;
   bool foundMove=false;
 
@@ -150,7 +150,7 @@ int getComputerMove(const verctor<char> board, char computerPiece){
   //else if human can win on next move, then block the move
   if (!foundMove){
     move=0;
-    humanPiece=getOpponentPiece(computerPiece);
+    char humanPiece=getOpponentPiece(computerPiece);
     while(!foundMove&&move<board.size()){
       if(isLegalMove(board,move)){
         board[move]=humanPiece;
@@ -167,18 +167,18 @@ int getComputerMove(const verctor<char> board, char computerPiece){
   if(!foundMove){
     move=0;
     unsigned int i=0;
-    const int MOVES_BY_PRIORITY={4,0,2,6,8,1,3,5,7};
+    const int MOVES_BY_PRIORITY[]={4,0,2,6,8,1,3,5,7};
 
-    while(!found && i<board.size()){
+    while(!foundMove && i<board.size()){
       move=MOVES_BY_PRIORITY[i];
       if(isLegalMove(board,move)){
-        found=true;
+        foundMove=true;
       }
       i++;
     }
   }
   cout<<"Computer takes the square number "<<move+1<<endl;
-  return move+1;
+  return move;
 }
 
 void announceWinner(char winner, char computerPiece, char humanPiece){
