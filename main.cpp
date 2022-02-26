@@ -76,6 +76,7 @@ char getHumanPiece(){
   return toupper(response);
 }
 
+
 char getOpponentPiece(char piece){
   if (piece==X){
     return O;
@@ -120,12 +121,21 @@ inline bool isLegalMove(const vector<char>& board, int move){
   return (board[move]==EMPTY);
 }
 
+int askMove(string question, int high,int low){
+  int move;
+  do{
+    cout<<question<<" ("<<low<<"-"<<high<<"):";
+    cin>>move;
+  }while(move>=high||move<=low);
+  return move-1;
+}
+
 int getHumanMove(const vector<char>& board, char humanPiece){
-  string question="Enter your next move (1-9).";
+  string question="Enter your next move.";
   int move=askMove(question,board.size());
   while(!isLegalMove(board,move)){
     cout<<"That position is occupied.\n";
-    move=askMove("Please choose again (1-9).",board.size());
+    move=askMove("Please choose again.",board.size());
   }
   cout<<"Ok!";
   return move;
